@@ -1,7 +1,7 @@
 from selenium import webdriver
 
 
-def browser_init(context):
+def browser_init(context): 
     """
     :param context: Behave context
     """

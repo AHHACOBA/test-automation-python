@@ -26,8 +26,14 @@ open_sign_in.click()
 # wait for 3 sec
 sleep(3)
 
-#create_acc_btn = driver.find_element(By.ID, 'createAccountSubmit').click()
+create_acc_btn = driver.find_element(By.ID, 'createAccountSubmit').click()
 # wait for 3 sec
-#sleep(3)
+sleep(3)
+
+#create_acc_button = driver.find_element(By.ID, 'continue').click()
+sign_in_link = driver.find_element(By.CSS_SELECTOR, "a.a-link-emphasis").click()
+
+# wait for 3 sec
+sleep(3)
 
 driver.quit()
