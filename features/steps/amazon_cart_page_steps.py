@@ -16,7 +16,8 @@ def verify_cart(context, cart_message):
 def verify_cart_item(context, expected_item):
     sleep(3)
     actual_item_text = context.driver.find_element(*CART_ITEM).text
-    assert actual_item_text.find(expected_item) > -1, f'Expected text is {expected_item}, but got {actual_item_text}'
+    assert expected_item in actual_item_text
+    #assert actual_item_text.find(expected_item) > -1, f'Expected text is {expected_item}, but got {actual_item_text}'
 
 
 
