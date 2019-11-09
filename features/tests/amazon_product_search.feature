@@ -23,4 +23,15 @@ Feature: Test for Amazon Search functionality
     And Click Amazon Shopping Cart icon
     Then Verify that cart has Vital Proteins Collagen Peptides Powder item
 
+ Scenario: User can add a product from today’s deals into the cart and then go back
+   to the previous window, refresh and see cart counter has an item
+   Given Open Amazon page
+   When Store original windows
+   And Click to open Deals under 25
+   And Switch to the newly opened window
+   Then Shop all deals are showing
+   Then Click on any product to add it to the cart
+   And User can close new window and switch back to original
+   And Refresh the current page
+   Then Verify cart has 1 item
 

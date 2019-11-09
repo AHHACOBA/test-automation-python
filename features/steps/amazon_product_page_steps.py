@@ -44,7 +44,7 @@ def verify_colors(context):
     #for color in color_webelements:
         #color.click()
         #actual_color = context.driver.find_element(*SELECTED_COLOR).text
-        #assert actual_color == expected_colors[color_webelements.index(color)]
+        assert actual_color == expected_colors[color_webelements.index(color)]
 
 
 
