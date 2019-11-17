@@ -7,9 +7,10 @@ CART_ITEM = (By.CSS_SELECTOR, "span.a-list-item a.sc-product-link[href*='B00NLR1
 
 @then('Verify text is {cart_message}')
 def verify_cart(context, cart_message):
-    cart_empty_text = context.driver.find_element(*CART_HEADER).text
-    #assert cart_empty_text in context.driver.page_source
-    assert cart_message in cart_empty_text
+    #cart_empty_text = context.driver.find_element(*CART_HEADER).text
+      #assert cart_empty_text in context.driver.page_source
+    #assert cart_message in cart_empty_text
+    context.app.cart_page.verify_cart(cart_message)
 
 
 @then('Verify that cart has {expected_item} item')

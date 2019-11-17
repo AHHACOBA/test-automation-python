@@ -8,6 +8,7 @@ from time import sleep
 
 AMAZON_MUSIC_MENU_ITEM = (By.XPATH, "//ul[contains(@class, 'hmenu-visible')]//div[contains(text(), 'Amazon Music')]")
 AMAZON_MUSIC_MENU_ITEM_RESULTS = (By.CSS_SELECTOR, "ul.hmenu-visible a:not(.hmenu-back-button)")
+BESTSELLERS_LINK = (By.CSS_SELECTOR, 'div#nav-xshop a[tabindex="48"]')
 CART_ITEM_COUNT = (By.ID, 'nav-cart-count')
 CART = (By.ID, 'nav-cart')
 DEALS_UNDER_25_LINK = (By.XPATH, "//a[contains(@aria-label, 'deals under $25')]")
@@ -21,39 +22,45 @@ SIGN_IN_TOOLTIP = (By.CSS_SELECTOR, '#nav-signin-tooltip span')
 
 @given('Open Amazon page')
 def open_amazon(context):
-    context.driver.get('https://www.amazon.com')
+    #context.driver.get('https://www.amazon.com')
+    context.app.main_page.open_page()
+
 
 
 @when('Click Amazon Orders link')
 def click_orders_link(context):
-    context.driver.find_element(*ORDERS_LINK).click()
+    #context.driver.find_element(*ORDERS_LINK).click()
+    context.app.main_page.click_orders()
 
 
 @when('Search for {product}')
 def search_product(context, product):
-    search_field = context.driver.find_element(*SEARCH_INPUT)
-    search_field.clear()
-    search_field.send_keys(product)
-    context.driver.find_element(*SEARCH_ICON).click()
+    #search_field = context.driver.find_element(*SEARCH_INPUT)
+    #search_field.clear()
+    #search_field.send_keys(product)
+    #context.driver.find_element(*SEARCH_ICON).click()
+    context.app.main_page.search_for_keyword(product)
 
 
 @when('Click Amazon Shopping Cart icon')
 def click_cart(context):
-    cart_icon = context.driver.find_element(*SEARCH_CART)
-    print(cart_icon)
-    context.driver.refresh()
-    cart_icon = context.driver.find_element(*SEARCH_CART)
-    print(cart_icon)
-    cart_icon.click()
-
+    #cart_icon = context.driver.find_element(*SEARCH_CART)
+    #print(cart_icon)
+    #context.driver.refresh()
+    #cart_icon = context.driver.find_element(*SEARCH_CART)
+    #print(cart_icon)
+    #cart_icon.click()
+    context.app.main_page.click_cart()
 
 @when('Click on hamburger menu')
 def click_ham_menu(context):
-    context.driver.find_element(*HAM_MENU).click()
+    #context.driver.find_element(*HAM_MENU).click()
+    context.app.main_page.click_ham_menu()
 
 @when('Click on Amazon Music menu item')
 def click_amazon_music(context):
-    context.driver.find_element(*AMAZON_MUSIC_MENU_ITEM).click()
+    #context.driver.find_element(*AMAZON_MUSIC_MENU_ITEM).click()
+    context.app.menu_page.click_music_menu()
 
 
 @then('Verify cart has {expected_item_count} item')
@@ -66,13 +73,14 @@ def verify_item_count(context, expected_item_count):
 @then('{expected_item_count} menu items are present')
 def verify_amount_of_items(context, expected_item_count):
     sleep(3)
-    #print(len(context.driver.find_elements(*AMAZON_MUSIC_MENU_ITEM_RESULTS)))
-    actual_item_count = len(context.driver.find_elements(*AMAZON_MUSIC_MENU_ITEM_RESULTS))
-    #print(type(expected_item_count)) #-> string
-    #print(type(actual_item_count)) #-> integer
-    #expected_item_count = int(expected_item_count)
-    assert actual_item_count == int(expected_item_count), \
-        f'Expected {expected_item_count} items but got {actual_item_count}'
+     #print(len(context.driver.find_elements(*AMAZON_MUSIC_MENU_ITEM_RESULTS)))
+    #actual_item_count = len(context.driver.find_elements(*AMAZON_MUSIC_MENU_ITEM_RESULTS))
+     #print(type(expected_item_count)) #-> string
+     #print(type(actual_item_count)) #-> integer
+     #expected_item_count = int(expected_item_count)
+    #assert actual_item_count == int(expected_item_count), \
+    #    f'Expected {expected_item_count} items but got {actual_item_count}'
+    context.app.menu_page.verify_items_amount(expected_item_count)
 
 
 @then('Verify that hamburger menu is present')
@@ -86,6 +94,12 @@ def verify_ham_menu(context):
     print(type(context.driver.find_element(*HAM_MENU)))
 
 # ================================ TOOLTIP ==================================
+
+@when('Click on Sign In btn from Sign In tooltip')
+def click_signin_tooltip(context):
+  context.driver.wait.until(EC.element_to_be_clickable(SIGN_IN_TOOLTIP)).click()
+  #assert EC.element_to_be_clickable(SIGN_IN_TOOLTIP) == True
+
 
 
 @then('Verify Sign In tooltip is present and clickable')
@@ -148,6 +162,10 @@ def close_and_switch_window_back(context):
 @then('Refresh the current page')
 def refresh_current_page(context):
     context.driver.refresh()
+
+@when('Clicks on Best Sellers link on the top menu')
+def click_to_bestsellers_link(context):
+    context.driver.find_element(*BESTSELLERS_LINK).click()
 
 
 

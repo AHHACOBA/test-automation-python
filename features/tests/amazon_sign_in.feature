@@ -12,3 +12,8 @@ Feature: Tests for Sign In functionality
     Then Verify Sign In tooltip is present and clickable
     When Wait until Sign In tooltip disappears
     Then Verify Sign In tooltip is not clickable
+
+  Scenario: Logged out user sees Sign in page when clicking Orders
+    Given Open Amazon page
+    When Click Amazon Orders link
+    Then Verify Sign In page is opened

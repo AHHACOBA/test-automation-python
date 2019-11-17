@@ -2,7 +2,6 @@ from behave import then
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 
-from time import sleep
 
 TODAYS_DEALS_HEADER = (By.CSS_SELECTOR, 'div.a-row.a-spacing-top-small.suppleTitle h1')
 RANDOM_PRODUCT = (By.XPATH, "//a[contains(text(), 'See details')]")

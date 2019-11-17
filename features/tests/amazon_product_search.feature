@@ -5,7 +5,7 @@ Feature: Test for Amazon Search functionality
   Scenario: User can search for a product
     Given Open Amazon page
     When Search for shoes
-    Then Search results for shoes is shown
+    Then Search results for "shoes" is shown
 
   Scenario: User can add printer paper product into the cart
     Given Open Amazon page
