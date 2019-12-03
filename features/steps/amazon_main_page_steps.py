@@ -6,13 +6,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 
 
-AMAZON_MUSIC_MENU_ITEM = (By.XPATH, "//ul[contains(@class, 'hmenu-visible')]//div[contains(text(), 'Amazon Music')]")
-AMAZON_MUSIC_MENU_ITEM_RESULTS = (By.CSS_SELECTOR, "ul.hmenu-visible a:not(.hmenu-back-button)")
+#AMAZON_MUSIC_MENU_ITEM = (By.XPATH, "//ul[contains(@class, 'hmenu-visible')]//div[contains(text(), 'Amazon Music')]")
+#AMAZON_MUSIC_MENU_ITEM_RESULTS = (By.CSS_SELECTOR, "ul.hmenu-visible a:not(.hmenu-back-button)")
 BESTSELLERS_LINK = (By.CSS_SELECTOR, 'div#nav-xshop a[tabindex="48"]')
 CART_ITEM_COUNT = (By.ID, 'nav-cart-count')
 CART = (By.ID, 'nav-cart')
 DEALS_UNDER_25_LINK = (By.XPATH, "//a[contains(@aria-label, 'deals under $25')]")
-HAM_MENU = (By.ID, 'nav-hamburger-menu')
+#HAM_MENU = (By.ID, 'nav-hamburger-menu')
 ORDERS_LINK = (By.CSS_SELECTOR, "a#nav-orders span.nav-line-2")
 SEARCH_INPUT = (By.ID, 'twotabsearchtextbox')
 SEARCH_ICON = (By.CSS_SELECTOR, "input.nav-input[type='submit']")
@@ -24,7 +24,6 @@ SIGN_IN_TOOLTIP = (By.CSS_SELECTOR, '#nav-signin-tooltip span')
 def open_amazon(context):
     #context.driver.get('https://www.amazon.com')
     context.app.main_page.open_page()
-
 
 
 @when('Click Amazon Orders link')
@@ -59,6 +58,7 @@ def click_ham_menu(context):
 
 @when('Click on Amazon Music menu item')
 def click_amazon_music(context):
+    #sleep(2)
     #context.driver.find_element(*AMAZON_MUSIC_MENU_ITEM).click()
     context.app.menu_page.click_music_menu()
 
@@ -72,7 +72,8 @@ def verify_item_count(context, expected_item_count):
 
 @then('{expected_item_count} menu items are present')
 def verify_amount_of_items(context, expected_item_count):
-    sleep(3)
+    expected_item_count = int(expected_item_count)
+    #sleep(3)
      #print(len(context.driver.find_elements(*AMAZON_MUSIC_MENU_ITEM_RESULTS)))
     #actual_item_count = len(context.driver.find_elements(*AMAZON_MUSIC_MENU_ITEM_RESULTS))
      #print(type(expected_item_count)) #-> string
@@ -86,12 +87,12 @@ def verify_amount_of_items(context, expected_item_count):
 @then('Verify that hamburger menu is present')
 def verify_ham_menu(context):
     print('\nFIND ELEMENTSSS =>> ')
-    print(context.driver.find_elements(*HAM_MENU))
-    print(type(context.driver.find_elements(*HAM_MENU)))
+    #print(context.driver.find_elements(*HAM_MENU))
+    #print(type(context.driver.find_elements(*HAM_MENU)))
 
     print('\nFIND ELEMENT =>> ')
-    print(context.driver.find_element(*HAM_MENU))
-    print(type(context.driver.find_element(*HAM_MENU)))
+    #print(context.driver.find_element(*HAM_MENU))
+    #print(type(context.driver.find_element(*HAM_MENU)))
 
 # ================================ TOOLTIP ==================================
 
@@ -166,6 +167,14 @@ def refresh_current_page(context):
 @when('Clicks on Best Sellers link on the top menu')
 def click_to_bestsellers_link(context):
     context.driver.find_element(*BESTSELLERS_LINK).click()
+
+@when('Select {department} department')
+def select_department(context, department):
+    context.app.main_page.select_department(department)
+
+@then('{department} department is selected')
+def verify_selected_department(context, department):
+    context.app.main_page.verify_selected_department(department)
 
 
 

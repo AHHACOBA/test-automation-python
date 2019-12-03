@@ -26,8 +26,24 @@ def close_side_suggestion(context):
 
 @given('Open Amazon product {productid} page')
 def open_item_page(context, productid):
-    context.driver.get(f'https://www.amazon.com/gp/product/{productid}/')
+    # context.driver.get(f'https://www.amazon.com/gp/product/{productid}')
+    context.app.product_page.open_product(productid)
 
+@when('Hoover over Add To Cart button')
+def hover_add_to_cart(context):
+    context.app.product_page.hover_add_to_cart()
+
+@when('Hoover over Sales and Deals link')
+def hover_over_link(context):
+    context.app.product_page.hover_over_link()
+
+@then('Verify size selection tooltip is shown')
+def verify_size_tooltip(context):
+    context.app.product_page.verify_size_tooltip()
+
+@then('Verify Sales and Deals flyout is shown')
+def verify_flyout_shown(context):
+    context.app.product_page.verify_flyout_shown()
 
 @then('Verify user can select through colors')
 def verify_colors(context):
@@ -44,7 +60,7 @@ def verify_colors(context):
     #for color in color_webelements:
         #color.click()
         #actual_color = context.driver.find_element(*SELECTED_COLOR).text
-        assert actual_color == expected_colors[color_webelements.index(color)]
+        #assert actual_color == expected_colors[color_webelements.index(color)]
 
 
 
